@@ -3,6 +3,7 @@ node_modules/
 package-lock.json
 
 # Ignore Firebase service account key
+backend/*.json
 backend/serviceAccount.json
 
 # Ignore environment variables
