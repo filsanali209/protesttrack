@@ -1,0 +1,15 @@
+# Ignore Node.js dependencies
+node_modules/
+package-lock.json
+
+# Ignore Firebase service account key
+backend/serviceAccount.json
+
+# Ignore environment variables
+backend/.env
+frontend/.env
+
+# Ignore build files
+frontend/.expo/
+frontend/android/
+frontend/ios/
