@@ -1,19 +1,24 @@
-const express = require("express");
-const { db } = require("./firebase"); 
+const express = require('express');
+const cors = require('cors');
+const admin = require("firebase-admin");
 
+// Import routes
+const protestRoutes = require('./routes/protestRoutes');
+const userRoutes = require('./routes/userRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
+
+// Initialize express app
 const app = express();
+app.use(cors());
 app.use(express.json());
 
+// Register Routes
+app.use('/api/protests', protestRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/notifications', notificationRoutes);
+
+// Server Port
 const PORT = process.env.PORT || 5001;
 
-// Test Firestore connection
-app.get("/test-firestore", async (req, res) => {
-  try {
-    await db.collection("test").add({ message: "Firestore is working!" });
-    res.send("Firestore is connected!");
-  } catch (error) {
-    res.status(500).send("Error connecting to Firestore: " + error.message);
-  }
-});
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Start Server
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
