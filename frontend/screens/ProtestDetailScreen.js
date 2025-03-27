@@ -6,7 +6,7 @@ const ProtestDetailScreen = ({ route, navigation }) => {
   const { protestId } = route.params; 
   const [protest, setProtest] = useState(null);
 
-  // Fetch protest details by ID
+  // fetch protest details 
   useEffect(() => {
     axios.get(`http://localhost:5001/api/protests/${protestId}`)  
       .then(response => {
@@ -21,8 +21,13 @@ const ProtestDetailScreen = ({ route, navigation }) => {
 
   return (
     <View>
-      <Text>{protest.name}</Text>
+      <Text>{protest.categoryName}</Text>
+      <Text>{protest.title}</Text>
       <Text>{protest.description}</Text>
+      <Text>{protest.date}</Text>
+      <Text>{protest.time}</Text>
+      <Text>{protest.estimatedAttendees}</Text>
+      <Text>{protest.location}</Text>
       <Button title="Back to Home" onPress={() => navigation.goBack()} />
     </View>
   );

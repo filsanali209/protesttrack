@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const ProtestCard = ({ protest }) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>{protest.name}</Text>
+      <Text style={styles.title}>{protest.title}</Text>
       <Text>{protest.date}</Text>
       <Text>{protest.location}</Text>
     </View>

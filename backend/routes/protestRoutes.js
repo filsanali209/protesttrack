@@ -68,4 +68,22 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Get a single protest
+router.get('/:protestId', async (req, res) => {
+    try {
+        const { protestId } = req.params;  
+
+        const protestRef = db.collection('protests').doc(protestId);
+        const protestDoc = await protestRef.get();
+
+        if (!protestDoc.exists) {
+            return res.status(404).json({ error: "Protest not found!" });
+        }
+
+        res.status(200).json(protestDoc.data());  
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 module.exports = router;
