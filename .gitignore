@@ -8,9 +8,3 @@ backend/serviceAccount.json
 
 # Ignore environment variables
 backend/.env
-frontend/.env
-
-# Ignore build files
-frontend/.expo/
-frontend/android/
-frontend/ios/
