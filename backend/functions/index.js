@@ -23,30 +23,27 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 const db = admin.firestore();
 
-// Scheduled function to delete expired protests every 24 hours
-exports.deleteExpiredProtests =
-  functions.pubsub.schedule("every 24 hours").onRun(async () => {
-    try {
-      // Get today's date in YYYY-MM-DD format
-      const today = new Date().toISOString().split("T")[0];
-      console.log(`Deleting expired protests before ${today}`);
+exports.deleteExpiredProtests = functions.pubsub.schedule("every 24 hours").onRun(async () => {
+  try {
+    const now = new Date(); 
+    console.log(`Deleting protests with date before ${now.toISOString()}`);
 
-      const protestsSnapshot = await db.collection("protests")
-          .where("date", "<", today)
-          .get();
+    const protestsSnapshot = await db.collection("protests")
+      .where("date", "<", now)
+      .get();
 
-      if (protestsSnapshot.empty) {
-        console.log("No expired protests found.");
-        return null;
-      }
-
-      const batch = db.batch();
-      protestsSnapshot.forEach((doc) => batch.delete(doc.ref));
-      await batch.commit();
-
-      console.log(`Deleted ${protestsSnapshot.size} expired protests.`);
+    if (protestsSnapshot.empty) {
+      console.log("No expired protests found.");
       return null;
-    } catch (error) {
-      console.error("Error deleting expired protests:", error);
     }
-  });
+
+    const batch = db.batch();
+    protestsSnapshot.forEach((doc) => batch.delete(doc.ref));
+    await batch.commit();
+
+    console.log(`Deleted ${protestsSnapshot.size} expired protests.`);
+    return null;
+  } catch (error) {
+    console.error("Error deleting expired protests:", error);
+  }
+});
