@@ -1,26 +1,21 @@
-import { Tabs } from 'expo-router';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import MapScreen from './Map';
+import ListScreen from './List';
 
-export default function ProtestsTabsLayout() {
+const TopTabs = createMaterialTopTabNavigator();
+
+export default function ProtestTopTabs() {
   return (
-    <Tabs>
-      <Tabs.Screen
-        name="Map"
-        options={{
-          title: 'Map',
-        }}
-      />
-      <Tabs.Screen
-        name="List"
-        options={{
-          title: 'List',
-        }}
-      />
-      <Tabs.Screen
-        name="[id]"
-        options={{
-          href: null, 
-        }}
-      />
-    </Tabs>
+    <TopTabs.Navigator
+      screenOptions={{
+        tabBarIndicatorStyle: { backgroundColor: 'tomato' },
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+        swipeEnabled: true,
+      }}
+    >
+      <TopTabs.Screen name="Map" component={MapScreen} />
+      <TopTabs.Screen name="List" component={ListScreen} />
+    </TopTabs.Navigator>
   );
 }

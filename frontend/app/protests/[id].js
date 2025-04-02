@@ -30,7 +30,7 @@ const ProtestDetailScreen = ({ route, navigation }) => {
       <Text>{protest.time}</Text>
       <Text>{protest.estimatedAttendees}</Text>
       <Text>{protest.location}</Text>
-      <Button title="Back to Home" onPress={() => router.back()} />
+      <Button title="Back" onPress={() => router.back()} />
     </View>
   );
 };
