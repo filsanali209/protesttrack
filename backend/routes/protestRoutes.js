@@ -7,6 +7,29 @@ const sendNotification = notificationRoutes.sendNotification;
 
 const router = express.Router();
 
+// Function to get latitude and longitude from address
+async function geocodeAddress(address) {
+    const API_KEY = 'B0xHNKvNU8k5BRV3qJRXEQGFIAk=';  
+    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`;
+    
+    try {
+        const response = await axios.get(geocodeUrl);
+        const result = response.data.results[0];
+
+        if (result) {
+            const latitude = result.geometry.location.lat;
+            const longitude = result.geometry.location.lng;
+            return { latitude, longitude };
+        } else {
+            throw new Error('Address not found');
+        }
+    } catch (error) {
+        console.error('Geocoding error:', error);
+        throw new Error('Failed to geocode address');
+    }
+}
+
+
 // Create Protest (Admin Only)
 router.post('/', adminAuth, async (req, res) => {
     try {

@@ -6,6 +6,7 @@ const admin = require("firebase-admin");
 const protestRoutes = require('./routes/protestRoutes');
 const userRoutes = require('./routes/userRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const createTokenRoutes = require('./createToken');
 
 // Initialize express app
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/api/protests', protestRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/', createTokenRoutes);
 
 // Server Port
 const PORT = process.env.PORT || 5001;

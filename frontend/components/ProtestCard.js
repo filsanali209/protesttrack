@@ -5,8 +5,8 @@ const ProtestCard = ({ protest }) => {
   return (
     <View style={styles.card}>
       <Text style={styles.title}>{protest.title}</Text>
-      <Text>{protest.date}</Text>
-      <Text>{protest.location}</Text>
+      <Text style={styles.title}>{protest.date}</Text>
+      <Text style={styles.title}>{protest.location}</Text>
     </View>
   );
 };
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   card: {
     padding: 10,
     marginVertical: 7,
-    backgroundColor: 'white',
+    backgroundColor: 'grey',
     borderRadius: 10,
     shadowColor: 'grey',
     shadowOpacity: 0.2,

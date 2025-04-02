@@ -19,6 +19,7 @@ const adminAuth = async (req, res, next) => {
         req.user = decodedToken; //attach user info to request
         next(); //Next middleware
     } catch (error) {
+        console.error('Authorization error:', error);
         res.status(500).json({ error: "Authorisation error!" });
     }
 };
